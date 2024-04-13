@@ -2,18 +2,13 @@ import { Box } from '@chakra-ui/layout';
 import './styles.css';
 import SingleChat from './SingleChat';
 import { ChatState } from '../Context/ChatProvider';
-import { useBreakpointValue } from '@chakra-ui/react';
 
 const ChatBox = ({ fetchAgain, setFetchAgain }) => {
   const { selectedChat } = ChatState();
-  const display = useBreakpointValue({
-    base: selectedChat ? 'flex' : 'none',
-    md: 'flex',
-  });
 
   return (
     <Box
-      display={display}
+      display={{ base: selectedChat ? 'flex' : 'none', md: 'flex' }}
       alignItems="center"
       flexDir="column"
       p={3}

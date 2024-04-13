@@ -3,16 +3,12 @@ const colors = require('colors');
 
 const connectDB = async () => {
   try {
-    const connection = await mongoose.connect(process.env.MONGO_URI);
+    const conn = await mongoose.connect(process.env.MONGO_URI);
 
-    console.log(
-      colors.cyan.underline(
-        `MongoDB Connected: ${connection.connection.host} `,
-      ),
-    );
+    console.log(`MongoDB Connected: ${conn.connection.host}`.cyan.underline);
   } catch (error) {
-    console.log(colors.red.bold(`Error: ${error.message}`));
-    process.exit();
+    console.error(`Error: ${error.message}`.red.bold);
+    process.exit(1); // Exit with a non-zero status code to indicate an error
   }
 };
 

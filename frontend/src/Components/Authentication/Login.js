@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { VStack } from '@chakra-ui/layout';
 import { Button } from '@chakra-ui/button';
 import { FormControl, FormLabel } from '@chakra-ui/form-control';
 import { Input, InputGroup, InputRightElement } from '@chakra-ui/input';
+import { VStack } from '@chakra-ui/layout';
+import { useState } from 'react';
 import axios from 'axios';
 import { useToast } from '@chakra-ui/react';
 import { useHistory } from 'react-router-dom';
@@ -10,18 +10,14 @@ import { ChatState } from '../../Context/ChatProvider';
 
 const Login = () => {
   const [show, setShow] = useState(false);
+  const handleClick = () => setShow(!show);
+  const toast = useToast();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [loading, setLoading] = useState(false);
 
-  const toast = useToast();
   const history = useHistory();
-
   const { setUser } = ChatState();
-
-  const handleShowClick = () => {
-    setShow(!show);
-  };
 
   const submitHandler = async () => {
     setLoading(true);
@@ -79,8 +75,8 @@ const Login = () => {
       <FormControl id="email" isRequired>
         <FormLabel>Email Address</FormLabel>
         <Input
-          type="email"
           value={email}
+          type="email"
           placeholder="Enter Your Email Address"
           onChange={e => setEmail(e.target.value)}
         />
@@ -89,13 +85,13 @@ const Login = () => {
         <FormLabel>Password</FormLabel>
         <InputGroup size="md">
           <Input
-            type={show ? 'text' : 'password'}
             value={password}
-            placeholder="Enter password"
             onChange={e => setPassword(e.target.value)}
+            type={show ? 'text' : 'password'}
+            placeholder="Enter password"
           />
           <InputRightElement width="4.5rem">
-            <Button h="1.75rem" size="sm" onClick={handleShowClick}>
+            <Button h="1.75rem" size="sm" onClick={handleClick}>
               {show ? 'Hide' : 'Show'}
             </Button>
           </InputRightElement>

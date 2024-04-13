@@ -2,14 +2,12 @@ import { AddIcon } from '@chakra-ui/icons';
 import { Box, Stack, Text } from '@chakra-ui/layout';
 import { useToast } from '@chakra-ui/toast';
 import axios from 'axios';
-import { useBreakpointValue } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { getSender } from '../config/ChatLogics';
 import ChatLoading from './ChatLoading';
-// import GroupChatModal from './miscellaneous/GroupChatModal';
+import GroupChatModal from './miscellaneous/GroupChatModal';
 import { Button } from '@chakra-ui/react';
 import { ChatState } from '../Context/ChatProvider';
-import GroupChatModal from './miscellaneous/GroupChatModal';
 
 const MyChats = ({ fetchAgain }) => {
   const [loggedUser, setLoggedUser] = useState();
@@ -17,11 +15,6 @@ const MyChats = ({ fetchAgain }) => {
   const { selectedChat, setSelectedChat, user, chats, setChats } = ChatState();
 
   const toast = useToast();
-
-  const display = useBreakpointValue({
-    base: selectedChat ? 'none' : 'flex',
-    md: 'flex',
-  });
 
   const fetchChats = async () => {
     // console.log(user._id);
@@ -54,7 +47,7 @@ const MyChats = ({ fetchAgain }) => {
 
   return (
     <Box
-      display={display}
+      display={{ base: selectedChat ? 'none' : 'flex', md: 'flex' }}
       flexDir="column"
       alignItems="center"
       p={3}
@@ -66,7 +59,7 @@ const MyChats = ({ fetchAgain }) => {
       <Box
         pb={3}
         px={3}
-        fontSize={{ base: '28px', md: '20px' }}
+        fontSize={{ base: '28px', md: '30px' }}
         fontFamily="Work sans"
         display="flex"
         w="100%"
