@@ -9,6 +9,8 @@ import { FormControl } from '@chakra-ui/form-control';
 import { Input } from '@chakra-ui/input';
 import UpdateGroupChatModal from './miscellaneous/UpdateGroupChatModal';
 import ScrollableChat from './ScrollableChat';
+import animationData from '../animations/typing.json';
+import Lottie from 'react-lottie';
 
 import axios from 'axios';
 
@@ -21,6 +23,15 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const { selectedChat, setSelectedChat, user } = ChatState();
   const [istyping, setIsTyping] = useState(false);
   const toast = useToast();
+
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice',
+    },
+  };
 
   const fetchMessages = async () => {
     if (!selectedChat) return;
@@ -213,12 +224,12 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             >
               {istyping ? (
                 <div>
-                  {/* <Lottie
-                    // options={defaultOptions}
-                    // height={50}
+                  <Lottie
+                    options={defaultOptions}
+                    height={50}
                     width={70}
                     style={{ marginBottom: 15, marginLeft: 0 }}
-                  /> */}
+                  />
                 </div>
               ) : (
                 <></>
